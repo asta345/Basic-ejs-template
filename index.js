@@ -8,39 +8,33 @@ const app =express();
 app.set('view engine','ejs');
 // to set a directory
 app.set('views',path.join(__dirname,'views'));
-app.use(express.urlencoded()); 
+app.use(express.urlencoded()); //middleware function
+app.use(express.static('assets'));//to accesing static files
+//middleware 1
+// app.use(function(req,res,next){
+// 	req.myname="avi";
+// 	//console.log('middleware one 1 bro');
+// 	next();
+// });
+
+//middleware 2
+// app.use(function(req,res,next){
+// 	console.log('middleware 2');
+// 	console.log('my name from mw2 is',req.myname )
+// 	next();
+// })
 var Contactlist=[
 	{
 		name:"asta",
 		phone:"9999955555"
 	},
-	{
-		name:"yami",
-		phone:"999999999"
-	},
-	{
-		name:"veldora",
-		phone:"99999999991"
-	},
-	{
-		name:"teach",
-		phone:"4445556667"
-	},
-	{      
-		name:"issei",
-		phone:"1234567891"
-
-	},
-	{
-               name:"aokiji",
-	       phone:"345678912" 
-	},
+	
 
 ]
 // we have given get request to fetch data//   
 app.get('/',function(req, res){
 	console.log(__dirname ); //to display dirname in console
-
+        console.log(req.myname)
 	// res.send('<h1>its is running</h1>');
 	return res.render('home',{title:"My Contacts List",
 	Contact_list:Contactlist});//here we are endering a view,declaring locals 
