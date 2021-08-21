@@ -8,7 +8,7 @@ const app =express();
 app.set('view engine','ejs');
 // to set a directory
 app.set('views',path.join(__dirname,'views'));
-app.use(express.urlencoded()); //middleware function
+ app.use(express.urlencoded()); //middleware function
 app.use(express.static('assets'));//to accesing static files
 //middleware 1
 // app.use(function(req,res,next){
@@ -32,7 +32,7 @@ var Contactlist=[
 
 ]
 // we have given get request to fetch data//   
-app.get('/',function(req, res){
+app.get('/',function(req, res){ 
 	console.log(__dirname ); //to display dirname in console
         console.log(req.myname)
 	// res.send('<h1>its is running</h1>');
@@ -45,6 +45,10 @@ app.get('/practice',function(req,res){
 
 	return res.render('practice',{title:"LET so go!"});
 });
+app.get('/delete-contact:phone:name', function(req, res){
+	console.log(req.params);
+	let phone = req.params.phone
+    });
 //get requesting for home page where we written the form//
 app.post('/create-contact', function(req, res){
 	// Contactlist.push({
