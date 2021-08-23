@@ -45,10 +45,16 @@ app.get('/practice',function(req,res){
 
 	return res.render('practice',{title:"LET so go!"});
 });
-app.get('/delete-contact:phone:name', function(req, res){
-	console.log(req.params);
-	let phone = req.params.phone
-    });
+//for deleting a contact//
+app.get('/delete-contact/', function(req, res){
+	console.log(req.query);
+	let phone = req.query.phone;
+	let contactIndex=Contactlist.findIndex(contact=>contact.phone==phone);
+	if(contactIndex != -1){
+		Contactlist.splice(contactIndex,1);
+	}
+	return res.redirect('back');
+   });
 //get requesting for home page where we written the form//
 app.post('/create-contact', function(req, res){
 	// Contactlist.push({
