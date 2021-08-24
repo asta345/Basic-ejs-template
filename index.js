@@ -1,13 +1,18 @@
+// estblishment of connection betwen ejs module.
 const express=require('express');
 //const { request } = require('http');
 const path=require('path');
 const  port=10000;
 // to get all functionality of server we need to name it as app//
+// connecting to the database.
+const db =require('./config/mongoose');
+
+ const Contact =require('./models/contact');
 const app =express();
 // to setup ejs//
 app.set('view engine','ejs');
 // to set a directory
-app.set('views',path.join(__dirname,'views'));
+app.set('assets',path.join(__dirname,'assets'));
  app.use(express.urlencoded()); //middleware function
 app.use(express.static('assets'));//to accesing static files
 //middleware 1
