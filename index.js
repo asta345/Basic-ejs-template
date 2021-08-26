@@ -31,7 +31,10 @@ app.use(express.static('assets'));//to accesing static files
 var Contactlist=[
 	{
 		name:"asta",
-		phone:"9999955555"
+		phone:"999995555"
+		
+		name:"a",
+		phone:"9898909123"
 	},
 	
 
