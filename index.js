@@ -1,4 +1,5 @@
 // estblishment of connection betwen ejs module.
+const { Console } = require('console');
 const express=require('express');
 //const { request } = require('http');
 const path=require('path');
@@ -31,22 +32,27 @@ app.use(express.static('assets'));//to accesing static files
 var Contactlist=[
 	{
 		name:"asta",
-		phone:"999995555"
-		
-		name:"a",
-		phone:"9898909123"
+		phone:"9999955555"
 	},
 	
 
 ]
 // we have given get request to fetch data//   
 app.get('/',function(req, res){ 
-	console.log(__dirname ); //to display dirname in console
-        console.log(req.myname)
+	// console.log(__dirname ); //to display dirname in console
+        // console.log(req.myname)
+	// //to fetch the data and to display
+	Contact.find({},function(err,contact_list){
+		if(err){
+			console.log("error in db");
+		        return;
+		}
+		return res.render('home',{title:"My Contacts List",
+	Contact_list:contact_list});//here we are endering a view,declaring locals 
+});
+	});
 	// res.send('<h1>its is running</h1>');
-	return res.render('home',{title:"My Contacts List",
-	Contact_list:Contactlist});//here we are endering a view,declaring locals 
-})
+	
 
 app.get('/practice',function(req,res){
 	console.log(__dirname);
@@ -55,13 +61,22 @@ app.get('/practice',function(req,res){
 });
 //for deleting a contact//
 app.get('/delete-contact/', function(req, res){
+
 	console.log(req.query);
-	let phone = req.query.phone;
-	let contactIndex=Contactlist.findIndex(contact=>contact.phone==phone);
-	if(contactIndex != -1){
-		Contactlist.splice(contactIndex,1);
-	}
-	return res.redirect('back');
+	//get the id from query in the ul
+	let id = req.query.id;
+	Contact.findByIdAndDelete(id,function(err){
+		if(err){
+			console.log('error in deleteing obj');
+			return;
+		}
+		return res.redirect('back');
+	});
+	// let contactIndex=Contactlist.findIndex(contact=>contact.phone==phone);
+	// if(contactIndex != -1){
+	// 	Contactlist.splice(contactIndex,1);
+	// }
+	
    });
 //get requesting for home page where we written the form//
 app.post('/create-contact', function(req, res){
@@ -69,9 +84,19 @@ app.post('/create-contact', function(req, res){
 	// 	name:req.body.name,
 	// 	phone:req.body.phone
 	// });
-	Contactlist.push(req.body);
-	  return res.redirect('back');
+	// Contactlist.push(req.body);
+        Contact.create({
+		name:req.body.name,
+		phone:req.body.phone
+	
+	},function(err,newcontact){
+		if (err){console.log('error in creating alog');
+	      return;}
 
+	console.log('*****',newcontact)
+	
+	return res.redirect('back');
+});
 
 	// for checking in the terminal we have returned console.log
 	// console.log(req.body); 
