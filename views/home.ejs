@@ -1,0 +1,168 @@
+<!DOCTYPE html> 
+<html>
+
+	<head>
+		<title><%=locals.title%> </title>
+		<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+                <link href='assets/css/home.css' rel='stylesheet' type='text/css'>
+	    <style>
+		*{
+	margin:0;
+	padding: 0;
+}
+
+
+body{
+	text-align: center;
+	background: firebrick;
+	font-size: 30px;
+}
+#page-heading{
+	text-align: center;
+	margin-top: 20px;
+	color: black;
+	margin-bottom: 1px;
+
+}
+
+.bxs-contact{
+	position:absolute;
+	margin-left: -60px;
+	margin-top: 2px;
+}
+.bx-window-close{
+	background: white;
+	
+}
+
+ul {
+	 text-align: left;
+	margin-top: 20px;
+	width: 40%;
+	margin-left: 28%;
+	align-items: center;
+}
+
+
+li {    
+
+align-items: center;
+text-align: center;
+list-style: none;
+padding: 10px 20px;
+color: #ffffff;
+text-transform: capitalize;
+font-weight: 700;
+border: 2px solid black;
+border-radius: 5px;
+margin-bottom: 10px;
+background: black;
+transition: all 0.75s ease;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-ms-transition: all 0.5s ease;
+-o-transition: all 0.5 ease;
+}
+
+li:hover {
+background: #0992b4;
+}
+a .colour:hover{
+	background: red;
+}
+.form{
+position: relative;
+z-index: 2;
+}
+#cen{
+	align-items: center;
+	margin-right: 4.2%;
+}
+input{
+
+appearance: none;
+outline: 0;
+border: 1px solid fade(white, 40%);
+background-color: fade(white, 20%);
+width: 250px;
+align-items: center;
+border-radius: 3px;
+padding: 10px 15px;
+margin: 0 auto 10px auto;
+display: block;
+text-align: center;
+font-size: 18px;
+
+color: black;
+
+transition-duration: 0.25s;
+font-weight: 300;
+
+
+}
+
+button{
+	align-items: center;
+appearance: none;
+outline: 0;
+background-color:black;
+border: 0;
+padding: 10px 15px;
+color: cornsilk;
+border-radius: 3px;
+width: 250px;
+cursor: pointer;
+font-size: 18px;
+transition-duration: 0.25s;
+
+
+}
+	
+
+		 </style>	
+		
+		 
+	</head>
+		<body>
+			
+
+			<h1 id="page-heading"><i class='bx bxs-contact'></i>My Contact List</h1>
+			<div id="list">
+				<ul class="side" >
+					<%for(let i of Contact_list) {%>
+
+				           <li >
+						   <p><%=i.name%></p>
+						   <p><%=i.phone%></p>
+						
+					   </li>
+					   <div class="delete-button">
+						 
+							<a  class="colour" href="/delete-contact/?id=<%=i.id%>">
+							
+								<i class='bx bx-window-close'></i>
+							
+							</a>
+							
+							
+						
+
+					</div>
+					<%}%>
+					
+				</ul>
+			</div>
+			<div id="cen">
+		        <form action="/create-contact" method="POST">
+				<input type="text" name="name" placeholder="Enter name" required>
+				<input type="number" name="phone" placeholder="Enter phone" required>
+				<button type="submit">Add contact</button>
+				
+			
+			</form>
+		        </div>  
+			<script type="text/javascript" src="assets/images/js/home.js"></script>
+		</body>
+		
+	
+</html>
